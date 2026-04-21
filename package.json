@@ -1,0 +1,14 @@
+{
+  "name": "to-do-list",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static task manager app with GitHub Actions CI/CD.",
+  "scripts": {
+    "check:js": "node --check script.js",
+    "check:format": "prettier --check \"*.{html,css,js}\" \".github/workflows/*.{yml,yaml}\"",
+    "ci": "npm run check:js && npm run check:format"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}
