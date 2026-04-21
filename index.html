@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="app-shell">
+        <section class="hero-panel">
+            <p class="eyebrow">Personal workflow</p>
+            <h1>Keep every task visible, scheduled, and moving.</h1>
+            <p class="hero-copy">
+                Add work items, track deadlines, and update progress from one focused board.
+            </p>
+
+            <div class="hero-stats" id="heroStats">
+                <article>
+                    <span class="stat-value" id="totalTasks">0</span>
+                    <span class="stat-label">Total Tasks</span>
+                </article>
+                <article>
+                    <span class="stat-value" id="pendingTasks">0</span>
+                    <span class="stat-label">Pending</span>
+                </article>
+                <article>
+                    <span class="stat-value" id="completedTasks">0</span>
+                    <span class="stat-label">Completed</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="manager-panel">
+            <div class="panel-header">
+                <div>
+                    <p class="section-label">Task manager</p>
+                    <h2>Add or update a task</h2>
+                </div>
+                <button class="ghost-button hidden" id="cancelEditButton" type="button">Cancel Edit</button>
+            </div>
+
+            <form class="task-form" id="taskForm">
+                <div class="field-group">
+                    <label for="taskName">Task Name</label>
+                    <input id="taskName" name="taskName" type="text" maxlength="80" placeholder="Prepare sprint review" required>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-group">
+                        <label for="taskDeadline">Task Deadline</label>
+                        <input id="taskDeadline" name="taskDeadline" type="date" required>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="taskStatus">Task Status</label>
+                        <select id="taskStatus" name="taskStatus" required>
+                            <option value="Pending">Pending</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="primary-button" id="submitButton" type="submit">Add Task</button>
+            </form>
+
+            <div class="tasks-header">
+                <div>
+                    <p class="section-label">Current tasks</p>
+                    <h2>Overview</h2>
+                </div>
+            </div>
+
+            <div class="task-list" id="taskList" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <template id="taskCardTemplate">
+        <article class="task-card">
+            <div class="task-card__top">
+                <div>
+                    <span class="task-card__status"></span>
+                    <h3 class="task-card__title"></h3>
+                </div>
+                <div class="task-card__actions">
+                    <button class="icon-button edit-button" type="button">Edit</button>
+                    <button class="icon-button delete-button" type="button">Delete</button>
+                </div>
+            </div>
+
+            <div class="task-card__meta">
+                <div>
+                    <span class="meta-label">Deadline</span>
+                    <span class="task-card__deadline"></span>
+                </div>
+                <div>
+                    <span class="meta-label">Status</span>
+                    <span class="task-card__status-text"></span>
+                </div>
+            </div>
+        </article>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
