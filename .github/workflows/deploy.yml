@@ -37,6 +37,11 @@ jobs:
           cp script.js dist/
           cp styles.css dist/
 
+      - name: List dist contents
+        run: |
+          echo "Contents of dist before upload:"
+          ls -l dist
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
