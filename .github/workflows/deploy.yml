@@ -52,3 +52,19 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Verify deployed site is reachable
+        run: |
+          PAGE_URL="${{ steps.deployment.outputs.page_url }}"
+          INDEX_URL="${PAGE_URL%/}/index.html"
+
+          echo "Checking root URL: ${PAGE_URL}"
+          ROOT_STATUS=$(curl --silent --show-error --location --retry 8 --retry-delay 5 --retry-connrefused --max-time 30 --output /dev/null --write-out "%{http_code}" "${PAGE_URL}")
+          echo "Root status: ${ROOT_STATUS}"
+
+          echo "Checking index URL: ${INDEX_URL}"
+          INDEX_STATUS=$(curl --silent --show-error --location --retry 8 --retry-delay 5 --retry-connrefused --max-time 30 --output /dev/null --write-out "%{http_code}" "${INDEX_URL}")
+          echo "Index status: ${INDEX_STATUS}"
+
+          test "${ROOT_STATUS}" = "200"
+          test "${INDEX_STATUS}" = "200"
